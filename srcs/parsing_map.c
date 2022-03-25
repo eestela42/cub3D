@@ -1,10 +1,36 @@
 #include "../cub3D.h"
 
-int	error_in_map(char *line, int i, int height)
+int	check_space(char **map, int x, int y)
 {
-	(void)line;
-	(void)i;
-	(void)height;
+	if (x != 0 && map[x - 1][y] == '0')
+		return (1);
+	if (map[x + 1] && map[x + 1][y] == '0')
+		return (1);
+	if (y != 0 && map[x][y - 1] == '0')
+		return (1);
+	if (map[x][y + 1] && map[x][y + 1] == '0')
+		return (1);
+	return (0);
+}
+
+int	error_in_map(char **map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (map[x])
+	{
+		y = 0;
+		while (map[x][y])
+		{
+			if (map[x][y] == ' ' && check_space(map, x, y))
+				return (-1);
+			y++;
+		}
+		x++;
+	}
 	return (0);
 }
 
@@ -108,7 +134,6 @@ int	parsing_map(t_mast *ee, char *line)
 	height = map_height(line, start);
 	width = map_width(line, height, start);
 	ee->map = make_map(line, start, height, width);
-	
-	return (1);
+	return (error_in_map(ee->map));
 	(void)ee;
 }

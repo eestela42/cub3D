@@ -74,6 +74,7 @@ int	main(int ac, char **av)
 
 	ee.mlx = mlx_init();
 	check = parsing(&ee, av[1]);
+	printf("cehck = %i\n", check);
 	ee.win = mlx_new_window(ee.mlx, RESX, RESY, "cub3D");
 /*	ee.img.img = mlx_new_image(ee.mlx, RESX, RESY);
 	ee.img.addr = mlx_get_data_addr(ee.img.img, &ee.img.bits_per_pixel, &ee.img.line_length,
