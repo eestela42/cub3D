@@ -1,5 +1,5 @@
-#include "cub3D.h"
-
+#include "../cub3D.h"
+/*
 int	ft_end(t_mast *ee)
 {
 
@@ -63,24 +63,25 @@ int fill_image(t_data *img, t_cam *cam)
 
 	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
 }
-
+*/
 int	main(int ac, char **av)
 {
 	t_mast	ee;
-
+	int		check;
 	(void)ac;
 	(void)av;
 
-	ee.mlx = mlx_init();
-	//ft_display();
-	ee.win = mlx_new_window(ee.mlx, RESX, RESY, "cub3D");
 
-	ee.img.img = mlx_new_image(ee.mlx, RESX, RESY);
+	ee.mlx = mlx_init();
+	check = parsing(&ee, av[1]);
+	ee.win = mlx_new_window(ee.mlx, RESX, RESY, "cub3D");
+/*	ee.img.img = mlx_new_image(ee.mlx, RESX, RESY);
 	ee.img.addr = mlx_get_data_addr(ee.img.img, &ee.img.bits_per_pixel, &ee.img.line_length,
 								&ee.img.endian);
 	mlx_hook(ee.win, ClientMessage, NoEventMask, ft_end, &ee);
 	mlx_key_hook (ee.win, key_pressed, &ee);
-	fill_image(&ee.img);
+	//fill_image(&ee.img);
 	mlx_put_image_to_window(ee.mlx, ee.win, ee.img.img, 0, 0);
 	mlx_loop(ee.mlx);
+	*/
 }

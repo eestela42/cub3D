@@ -1,0 +1,51 @@
+gnl -> verrifier et recuperer les infos du fichier.cub
+
+Parsing
+recuperer tout le fichier en 1 ligne
+check si fichier ok
+recuperer info jusqu'a map
+cur map dans un tableau, chaque ligne de meme taille
+verrifier si map close
+
+
+NO ./path_to_the_north_texture
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture
+F 220,100,0
+C 225,30,0
+
+
+
+init t_mast
+
+tracer une drotie de la taille du nbr de nos pixels
+
+pour chaque pixel, envoyer un rayon, commencer par voir quels obstacles pourraient
+croiser notre rayon
+puis equations pour verrifier du plus proche au plus loin
+
+calculer la distance pour afficher la ligne de pixel du bloc a la bonne taille
+tracer en dessous et au dessus une ligne de la couleur du sol et du ciel
+
+
+error in map
+
+pos du joueur double
+char non valides
+murs non ferme
+	avant et apr spaces, avant et apr \n, premier lige et derniere ligne sont des 1
+
+
+1111111111111111111
+1000000000000000001
+1000000000000000001
+1000000000000000001
+1000000000000000001
+1000010000000000001
+10001 1000000000001
+1000010000000000001
+1000000000000000001
+1000000000000000001
+1000000000000000001
+1111111111111111111

@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../cub3D.h"
 
 t_point	add(t_point a, t_point b)
 {
