@@ -3,10 +3,10 @@
 
 void	init_mast(t_mast *ee)
 {
-	ee->sp.n.add = NULL;
-	ee->sp.s.add = NULL;
-	ee->sp.e.add = NULL;
-	ee->sp.w.add = NULL;
+	ee->sp.n.img = NULL;
+	ee->sp.s.img = NULL;
+	ee->sp.e.img = NULL;
+	ee->sp.w.img = NULL;
 }
 
 void	init_fct_tab(int	(*fct_tab[256])(t_mast *ee, char *line, int i))
@@ -22,9 +22,11 @@ void	init_fct_tab(int	(*fct_tab[256])(t_mast *ee, char *line, int i))
 	fct_tab['W'] = fct_tab_west;
 	fct_tab['1'] = fct_tab_map;
 	fct_tab['0'] = fct_tab_map;
+	fct_tab['F'] = fct_tab_floor;
+	fct_tab['C'] = fct_tab_ceiling;
 }
 
-int	get_sprites(t_mast *ee, char *line)
+int	get_info(t_mast *ee, char *line)
 {
 	int	i;
 	int	(*fct_tab[256])(t_mast *ee, char *line, int i);
@@ -40,9 +42,7 @@ int	get_sprites(t_mast *ee, char *line)
 			break ;
 		i = fct_tab[(int)line[i]](ee, line, i);
 	}
-	if (i < 0)
-		return (i);
-	return (parsing_map(ee, line));
+	return (i);
 }
 
 
@@ -70,5 +70,5 @@ int parsing(t_mast *ee, char *file)
 	free(buff);
 	if (!line)
 		return (-3);
-	return (get_sprites(ee, line));
+	return (get_info(ee, line));
 }

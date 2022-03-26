@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eestela <eestela@student.42.fr>            +#+  +:+       +#+         #
+#    By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/21 13:18:56 by user42            #+#    #+#              #
-#    Updated: 2022/03/25 18:51:38 by eestela          ###   ########.fr        #
+#    Updated: 2022/03/26 04:21:17 by maskedduck       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = clang
 OPENGL = -lXext -lX11 -lbsd -lm
-CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -ISrcs
+CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -ISrcs -fsanitize=address
 
 SRCS =	main.c				\
 		parsing.c			\

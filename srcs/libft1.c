@@ -79,3 +79,30 @@ char	*ft_substr(char *s, int start, int len)
 	new[i] = 0;
 	return (new);
 }
+
+int	ft_atoi(char *str)
+{
+	long int	nbr;
+	int				i;
+	int				sign;
+
+	i = 0;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+		i++;
+	sign = 1;
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	nbr = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		if (sign == -1)
+			nbr = nbr * 10 - (str[i] - 48);
+		if (sign == 1)
+			nbr = nbr * 10 + (str[i] - 48);
+		i++;
+	}
+	return ((int)nbr);
+}
