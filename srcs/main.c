@@ -44,6 +44,24 @@ int key_pressed(int key, t_mast *ee)
 # define ROTATE_LEFT	65361
 # define ROTATE_RIGHT	65363
 
+int key_release(int key, t_mast *ee)
+{
+	if (key == FORWARD_W_Z)
+		ee->cam.pos = ee->cam.pos;
+	if (key == BACK_S_S)
+		ee->cam.pos = ee->cam.pos;
+	if (key == RIGHT_D_D)
+		ee->cam.pos = ee->cam.pos;
+	if (key == LEFT_A_Q)
+		ee->cam.pos = ee->cam.pos;
+	if (key == ROTATE_LEFT)
+		ee->cam.angle = ee->cam.angle;
+	if (key == ROTATE_RIGHT)
+		ee->cam.angle = ee->cam.angle;
+	fill_image(&ee->img, &ee->cam, ee);
+	mlx_put_image_to_window(ee->mlx, ee->win, ee->img.img, 0, 0);
+	return (0);
+}
 /*t_point	intersection(t_ray ray, int *map)
 {
 	(void)ray;
@@ -278,7 +296,9 @@ int	main(int ac, char **av)
 	ee.img.addr = mlx_get_data_addr(ee.img.img, &ee.img.bits_per_pixel, &ee.img.line_length,
 								&ee.img.endian);
 	mlx_hook(ee.win, ClientMessage, NoEventMask, ft_end, &ee);
-	mlx_key_hook (ee.win, key_pressed, &ee);
+	mlx_hook (ee.win, 2, 1L << 0, key_pressed, &ee);
+	
+	mlx_hook (ee.win, 3, 1L << 1, key_release, &ee);
 	fill_image(&ee.img, &ee.cam, &ee);
 	mlx_put_image_to_window(ee.mlx, ee.win, ee.img.img, 0, 0);
 	mlx_loop(ee.mlx);

@@ -42,6 +42,7 @@ int	get_info(t_mast *ee, char *line)
 			break ;
 		i = fct_tab[(int)line[i]](ee, line, i);
 	}
+	free(line);
 	return (i);
 }
 
