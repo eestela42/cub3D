@@ -1,6 +1,5 @@
 #include "../cub3D.h"
 
-	
 int	xpm_to_image(void *mlx_ptr, char *line, int i, t_data *sprite)
 {
 	int			start;
@@ -19,10 +18,11 @@ int	xpm_to_image(void *mlx_ptr, char *line, int i, t_data *sprite)
 	path = ft_substr(line, start, end - start);
 	if (!path)
 		return (-1);
-	sprite->img = mlx_xpm_file_to_image(mlx_ptr, path, &sprite->width, &sprite->height);
+	sprite->img = mlx_xpm_file_to_image(mlx_ptr, path,
+			&sprite->width, &sprite->height);
 	if (sprite->img)
-		sprite->addr = mlx_get_data_addr(sprite->img, &sprite->bits_per_pixel, &sprite->line_length,
-								&sprite->endian);
+		sprite->addr = mlx_get_data_addr(sprite->img, &sprite->bits_per_pixel,
+				&sprite->line_length, &sprite->endian);
 	free(path);
 	if (!sprite->img || !sprite->addr)
 		return (-13);
@@ -31,46 +31,42 @@ int	xpm_to_image(void *mlx_ptr, char *line, int i, t_data *sprite)
 
 int	fct_tab_north(t_mast *ee, char *line, int i)
 {
-	printf("NORTH\n");
 	if (line[++i] != 'O' || ee->sp.n.img)
 		return (-150);
 	i += 1;
 	while (line[i] == ' ')
-	 	 i++;
-	return(xpm_to_image(ee->mlx, line, i, &ee->sp.n));
+		i++;
+	return (xpm_to_image(ee->mlx, line, i, &ee->sp.n));
 }
 
 int	fct_tab_south(t_mast *ee, char *line, int i)
 {
-	printf("SOUTH\n");
 	if (line[++i] != 'O' || ee->sp.s.img)
 		return (-1);
 	i += 1;
 	while (line[i] == ' ')
-	 	 i++;
-	return(xpm_to_image(ee->mlx, line, i, &ee->sp.s));
+		i++;
+	return (xpm_to_image(ee->mlx, line, i, &ee->sp.s));
 }
 
 int	fct_tab_east(t_mast *ee, char *line, int i)
 {
-	printf("EAST\n");
 	if (line[++i] != 'A' || ee->sp.e.img)
 		return (-1);
 	i += 1;
 	while (line[i] == ' ')
-	 	 i++;
-	return(xpm_to_image(ee->mlx, line, i, &ee->sp.e));
+		i++;
+	return (xpm_to_image(ee->mlx, line, i, &ee->sp.e));
 }
 
 int	fct_tab_west(t_mast *ee, char *line, int i)
 {
-	printf("WEST\n");
 	if (line[++i] != 'E' || ee->sp.w.img)
 		return (-1);
 	i += 1;
 	while (line[i] == ' ')
-	 	 i++;
-	return(xpm_to_image(ee->mlx, line, i, &ee->sp.w));
+		i++;
+	return (xpm_to_image(ee->mlx, line, i, &ee->sp.w));
 }
 
 int	check_rgb(int rgb[3])
@@ -90,7 +86,7 @@ int	fct_tab_floor(t_mast *ee, char *line, int i)
 	int	y;
 	int	start;
 	int	floor[3];
-	printf("floor\n");
+
 	i++;
 	while (line[i] && line[i] == ' ')
 		i++;
@@ -124,7 +120,7 @@ int	fct_tab_ceiling(t_mast *ee, char *line, int i)
 	int	y;
 	int	start;
 	int	ceil[3];
-	printf("ceiling\n");
+
 	i++;
 	while (line[i] && line[i] == ' ')
 		i++;

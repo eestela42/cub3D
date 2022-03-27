@@ -15,7 +15,7 @@
 # define RESY 900
 # define FOV 100 * M_PI / 180
 
-# define foot_velocity 		0.25
+# define foot_velocity 		0.3
 # define neck_velocity		10
 
 # define ROTATE_LEFT	65361

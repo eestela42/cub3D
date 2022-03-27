@@ -16,5 +16,5 @@ int	fct_tab_map(t_mast *ee, char *line, int i)
 		printf("All sprites good \n");
 	else
 		return (-205);
-	return(parsing_map(ee, line, i));
+	return (parsing_map(ee, line, i));
 }

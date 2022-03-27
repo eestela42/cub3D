@@ -185,8 +185,9 @@ int	fill_column(t_mast *ee, int x, char finder, float dist, t_point col, t_point
 {
 	int		y;
 	float	zone;
-	float coef_fov = tan(FOV * (float) RESY / RESX / 2) * 3;
+	float 	coef_fov;
 
+	coef_fov = tan(FOV * (float) RESY / RESX / 2) * 3;
 	y = 0;
 	while (y < RESY)
 	{
@@ -196,7 +197,8 @@ int	fill_column(t_mast *ee, int x, char finder, float dist, t_point col, t_point
 		else if (zone < -1)
 			my_mlx_pixel_put(&ee->img, x, y, ee->ceil);
 		else
-			my_mlx_pixel_put(&ee->img, x, y, color_pix(ee, col, finder, ray_dir, zone));
+			my_mlx_pixel_put(&ee->img, x, y,
+				color_pix(ee, col, finder, ray_dir, zone));
 		y++;
 	}
 	return (0);
@@ -213,24 +215,26 @@ float	projection(t_cam *cam, t_point col)
 	return (fabs(dot(ret, dir)));
 }
 
-int fill_image(t_data *img, t_cam *cam, t_mast *ee)
+int	fill_image(t_data *img, t_cam *cam, t_mast *ee)
 {
 	t_ray	ray;
 	t_point	ortho;
 	t_point	col;
 	char	finder;
-	(void) img;
-	int i = 0;
-	//int y = 0;
-	float coef_fov = tan(FOV / 2);
+	int		i;
+	float	coef_fov;
 
+	(void) img;
+	i = 0;
+	coef_fov = tan(FOV / 2);
 	ray.pos = (t_point){cam->pos.x, cam->pos.y};
 	ray.dir = (t_point){cos(cam->angle), sin(cam->angle)};
 	ortho = (t_point){ray.dir.y, -ray.dir.x};
 	while (i < RESX)
 	{
 		ray.dir = (t_point){cos(cam->angle), sin(cam->angle)};
-		ray.dir = normalize(add(ray.dir, mult(coef_fov * (i - RESX / 2.0f) / (RESX / 2.0f) , ortho)));
+		ray.dir = normalize(add(ray.dir,
+					mult(coef_fov * (i - RESX / 2.0f) / (RESX / 2.0f), ortho)));
 		finder = find_colision(ee, ray, &col);
 		fill_column(ee, i, finder, projection(cam, col), col, ray.dir);
 		i++;
@@ -255,7 +259,8 @@ int	main(int ac, char **av)
 	}
 	printf("cehck = %i\n", check);
 	ee.img.img = mlx_new_image(ee.mlx, RESX, RESY);
-	ee.img.addr = mlx_get_data_addr(ee.img.img, &ee.img.bits_per_pixel, &ee.img.line_length,							&ee.img.endian);
+	ee.img.addr = mlx_get_data_addr(ee.img.img,
+			&ee.img.bits_per_pixel, &ee.img.line_length, &ee.img.endian);
 	mlx_hook(ee.win, ClientMessage, NoEventMask, ft_end, &ee);
 	mlx_hook (ee.win, 2, 1L << 0, key_pressed, &ee);
 	mlx_loop_hook(ee.mlx, key_action, &ee);

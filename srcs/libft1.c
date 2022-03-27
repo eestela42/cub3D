@@ -1,8 +1,8 @@
 #include "../cub3D.h"
 
-int		ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -83,8 +83,8 @@ char	*ft_substr(char *s, int start, int len)
 int	ft_atoi(char *str)
 {
 	long int	nbr;
-	int				i;
-	int				sign;
+	int			i;
+	int			sign;
 
 	i = 0;
 	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
