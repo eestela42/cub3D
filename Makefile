@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/21 13:18:56 by user42            #+#    #+#              #
-#    Updated: 2022/03/26 04:21:17 by maskedduck       ###   ########.fr        #
+#    Updated: 2022/03/27 15:47:00 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,5 +38,7 @@ fclean: clean
 		rm -f $(NAME)
 
 re:		fclean all
+
+po: all clean
 
 .PHONY:	all  clean fclean re
