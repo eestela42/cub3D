@@ -20,10 +20,11 @@ int	xpm_to_image(void *mlx_ptr, char *line, int i, t_data *sprite)
 	if (!path)
 		return (-1);
 	sprite->img = mlx_xpm_file_to_image(mlx_ptr, path, &sprite->width, &sprite->height);
-	sprite->addr = mlx_get_data_addr(sprite->img, &sprite->bits_per_pixel, &sprite->line_length,
+	if (sprite->img)
+		sprite->addr = mlx_get_data_addr(sprite->img, &sprite->bits_per_pixel, &sprite->line_length,
 								&sprite->endian);
 	free(path);
-	if (!sprite->img)
+	if (!sprite->img || !sprite->addr)
 		return (-13);
 	return (i);
 }
@@ -136,7 +137,7 @@ int	fct_tab_ceiling(t_mast *ee, char *line, int i)
 		ceil[x] = ft_atoi(&line[start]);
 		while (y++ < 3 && line[i] >= '0' && line[i] <= '9')
 			i++;
-		if (line[i++] != ',' && x < 2)
+		if (x < 2 && line[i++] != ',')
 			return (-93);
 		start = i;
 		x++;

@@ -15,6 +15,9 @@
 # define RESY 900
 # define FOV 100 * M_PI / 180
 
+# define foot_velocity 		0.25
+# define neck_velocity		10
+
 # define ROTATE_LEFT	65361
 # define ROTATE_RIGHT	65363
 # define FORWARD_W_Z	119
@@ -72,6 +75,12 @@ typedef struct s_mast
 	void			*win;
 	int				floor;
 	int				ceil;
+	int				mv_forw;
+	int				mv_backw;
+	int				mv_left;
+	int				mv_right;
+	int				rot_right;
+	int				rot_left;
 	t_cam			cam;
 	t_rep_sprites	sp;
 	t_data			img;
@@ -101,6 +110,11 @@ int		fct_tab_west(t_mast *ee, char *line, int i);
 int		fct_tab_floor(t_mast *ee, char *line, int i);
 int		fct_tab_ceiling(t_mast *ee, char *line, int i);
 
+/* KEY_PRESS */
+
+int key_pressed(int key, t_mast *ee);
+int key_release(int key, t_mast *ee);
+int	key_action(t_mast *ee);
 
 /* POINT */
 t_point	add(t_point a, t_point b);
@@ -109,6 +123,9 @@ float	distance(t_point a, t_point b);
 t_point	normalize(t_point a);
 t_point	diff(t_point a, t_point b);
 float	dot(t_point a, t_point b);
+
+
+int	ft_end(t_mast *ee);
 
 int	create_trgb(int t, int r, int g, int b);
 

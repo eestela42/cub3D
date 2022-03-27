@@ -6,14 +6,15 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/21 13:18:56 by user42            #+#    #+#              #
-#    Updated: 2022/03/27 15:47:00 by user42           ###   ########.fr        #
+#    Updated: 2022/03/27 16:41:40 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = clang
 OPENGL = -lXext -lX11 -lbsd -lm
-CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -ISrcs -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -ISrcs 
+-fsanitize=address
 
 SRCS =	main.c				\
 		parsing.c			\
@@ -21,7 +22,9 @@ SRCS =	main.c				\
 		point.c				\
 		libft1.c			\
 		fct_tab_ender.c		\
-		fct_tab_sprites.c
+		fct_tab_sprites.c	\
+		key_press.c			\
+		new_image.c			
 
 OBJS = ${addprefix srcs/,${SRCS:.c=.o}}
 

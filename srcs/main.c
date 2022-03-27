@@ -6,43 +6,24 @@ int	ft_end(t_mast *ee)
 	int		i;
 
 	i = 0;
+	if (ee->map)
+		while (ee->map[i])
+			free(ee->map[i++]);
+	if (ee->map)
+		free(ee->map);
 	if (ee->win)
 		mlx_destroy_window(ee->mlx, ee->win);
 	if (ee->mlx)
 		mlx_destroy_display(ee->mlx);
 	free(ee->mlx);
-
 	i = 0;
 	exit(1);
 }
 
-int key_pressed(int key, t_mast *ee)
-{
-	t_point	dir;
-	t_point	ortho;
 
-	if (key == 65307)
-		ft_end(ee);
-	dir = (t_point){cos(ee->cam.angle), sin(ee->cam.angle)};
-	ortho = (t_point){dir.y, -dir.x};
-	if (key == FORWARD_W_Z)
-		ee->cam.pos = add(ee->cam.pos, mult(0.33, dir));
-	if (key == BACK_S_S)
-		ee->cam.pos = add(ee->cam.pos, mult(-0.33, dir));
-	if (key == RIGHT_D_D)
-		ee->cam.pos = add(ee->cam.pos, mult(0.33, ortho));
-	if (key == LEFT_A_Q)
-		ee->cam.pos = add(ee->cam.pos, mult(-0.33, ortho));
-	if (key == ROTATE_LEFT)
-		ee->cam.angle += 15 * M_PI / 180;
-	if (key == ROTATE_RIGHT)
-		ee->cam.angle -= 15 * M_PI / 180;
-	fill_image(&ee->img, &ee->cam, ee);
-	mlx_put_image_to_window(ee->mlx, ee->win, ee->img.img, 0, 0);
-	return (0);
-}
 # define ROTATE_LEFT	65361
 # define ROTATE_RIGHT	65363
+
 
 /*t_point	intersection(t_ray ray, int *map)
 {
@@ -174,7 +155,7 @@ int	color_pix(t_mast *ee, t_point col, char finder, t_point ray_dir, float zone)
 	float	offset;
 	int		i;
 	int		j;
-
+(void)finder;
 	if (finder == 'x')
 	{
 		if (ray_dir.x > 0)
@@ -182,7 +163,7 @@ int	color_pix(t_mast *ee, t_point col, char finder, t_point ray_dir, float zone)
 		else
 			texture = ee->sp.s;
 		offset = col.y - floor(col.y);
-		if (ray_dir.x <= 0)
+		if (ray_dir.x > 0)
 			offset = 1 - offset;
 	}
 	else
@@ -261,25 +242,26 @@ int	main(int ac, char **av)
 {
 	t_mast	ee;
 	int		check;
+
 	(void)ac;
-	(void)av;
-
-	int i;
-
-
 	ee.mlx = mlx_init();
-	i = 1;
-
-	check = parsing(&ee, av[1]);
-	printf("cehck = %i\n", check);
 	ee.win = mlx_new_window(ee.mlx, RESX, RESY, "cub3D");
-	printf("pos = %f %f angle = %f\n", ee.cam.pos.x, ee.cam.pos.y, ee.cam.angle);
+	ee.map = NULL;
+	check = parsing(&ee, av[1]);
+	if (check != -1024)
+	{
+		printf("ERROR %i\n", -check);
+		ft_end(&ee);
+	}
+	printf("cehck = %i\n", check);
 	ee.img.img = mlx_new_image(ee.mlx, RESX, RESY);
-	ee.img.addr = mlx_get_data_addr(ee.img.img, &ee.img.bits_per_pixel, &ee.img.line_length,
-								&ee.img.endian);
+	ee.img.addr = mlx_get_data_addr(ee.img.img, &ee.img.bits_per_pixel, &ee.img.line_length,							&ee.img.endian);
 	mlx_hook(ee.win, ClientMessage, NoEventMask, ft_end, &ee);
-	mlx_key_hook (ee.win, key_pressed, &ee);
+	mlx_hook (ee.win, 2, 1L << 0, key_pressed, &ee);
+	mlx_loop_hook(ee.mlx, key_action, &ee);
+	mlx_hook (ee.win, 3, 1L << 1, key_release, &ee);
 	fill_image(&ee.img, &ee.cam, &ee);
 	mlx_put_image_to_window(ee.mlx, ee.win, ee.img.img, 0, 0);
 	mlx_loop(ee.mlx);
+	ft_end(&ee);
 }

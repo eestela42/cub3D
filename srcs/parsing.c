@@ -42,6 +42,8 @@ int	get_info(t_mast *ee, char *line)
 			break ;
 		i = fct_tab[(int)line[i]](ee, line, i);
 	}
+	printf("sori i = %i\n", i);
+	free(line);
 	return (i);
 }
 

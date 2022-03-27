@@ -45,6 +45,7 @@ int	char_in_map(t_mast *ee, int x, int y)
 		return (1);
 	if (c != 'N' && c != 'E' && c != 'W' && c != 'S')
 		return (1);
+	ee->map[x][y] = '0';
 	ee->cam.pos.x = x + 0.5;
 	ee->cam.pos.y = y + 0.5;
 	if (c == 'E')
@@ -70,6 +71,7 @@ int	error_in_map(t_mast *ee, int height, int width)
 	ee->cam.pos.y = -1;
 	if (check_border(ee->map, height, width))
 		return (-75);
+	x = 0;
 	while (ee->map[x])
 	{
 		y = 0;
@@ -93,6 +95,17 @@ int	error_in_map(t_mast *ee, int height, int width)
 	return (-1024);
 }
 
+int	line_in_map(char *line, int i)
+{
+	while (line[i] && line[i] != '\n')
+	{
+		if (line[i] == '1')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	map_height(char *line, int i)
 {
 	int	height;
@@ -102,19 +115,21 @@ int	map_height(char *line, int i)
 	in_map = 1;
 	while (line[i])
 	{
-		if (line[i] == '1')
+		if (line_in_map(line, i))
 		{
 			if (in_map == -1)
 				return (-63);
 			in_map = 1;
 		}
-		if (line[i] == '\n' && in_map == 1)
+		else if (line[i] == '\n' && in_map == 1)
 		{
 			height++;
 			in_map = 0;
 		}
 		else if (line[i] == '\n')
 			in_map = -1;
+		else if (line[i] != ' ')
+			return (-63);
 		i++;
 	}
 	return (height);
@@ -185,6 +200,8 @@ int	parsing_map(t_mast *ee, char *line, int i)
 		i--;
 	start = ++i;
 	ee->height = map_height(line, start);
+	if (ee->height <= 0)
+		return (-63);
 	ee->width = map_width(line, ee->height, start);
 	ee->map = make_map(line, start, ee->height, ee->width);
 	return (error_in_map(ee, ee->height, ee->width));
