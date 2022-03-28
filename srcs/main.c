@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:32 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 15:46:17 by maskedduck       ###   ########.fr       */
+/*   Updated: 2022/03/28 17:41:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ int	main(int ac, char **av)
 	if (ac != 2 && !ft_strend_is(av[1], ".cub"))
 		ft_end(NULL);
 	ee.mlx = mlx_init();
-	ee.win = mlx_new_window(ee.mlx, RESX, RESY, "cub3D");
 	ee.map = NULL;
 	ee.check = parsing(&ee, av[1]);
 	if (ee.check != -1024)
 		ft_end(&ee);
+	ee.win = mlx_new_window(ee.mlx, RESX, RESY, "cub3D");
 	ee.img.img = mlx_new_image(ee.mlx, RESX, RESY);
 	ee.img.addr = mlx_get_data_addr(ee.img.img,
 			&ee.img.bits_per_pixel, &ee.img.line_length, &ee.img.endian);

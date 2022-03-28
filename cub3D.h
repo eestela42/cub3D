@@ -11,12 +11,12 @@
 # include <X11/keysym.h>
 # include <math.h>
 
-# define RESX 1600
-# define RESY 900
+# define RESX 1200
+# define RESY 600
 # define FOV 90 * M_PI / 180
-
-# define foot_velocity 		0.3
-# define neck_velocity		10
+# define HAUTEUR 0
+# define foot_velocity 		0.2
+# define neck_velocity		5
 
 # define ROTATE_LEFT	65361
 # define ROTATE_RIGHT	65363
@@ -90,6 +90,8 @@ typedef struct s_mast
 	int				mv_right;
 	int				rot_right;
 	int				rot_left;
+	float			hauteur;
+	float			jump;
 	t_cam			cam;
 	t_rep_sprites	sp;
 	t_data			img;

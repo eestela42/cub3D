@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:35 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 15:40:35 by maskedduck       ###   ########.fr       */
+/*   Updated: 2022/03/28 18:08:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	check_border(char **map, int height, int width)
 {
 	int	i;
 
+	i = 0;
 	i = -1;
 	while (++i < height)
 		if (map[i][0] != ' ' && map[i][0] != '1')
@@ -92,7 +93,7 @@ int	parse_map(t_mast *ee, int x, int y)
 		}
 		x++;
 	}
-	return (1);
+	return (0);
 }
 
 int	error_in_map(t_mast *ee, int height, int width)
@@ -106,7 +107,7 @@ int	error_in_map(t_mast *ee, int height, int width)
 	ee->cam.pos.y = -1;
 	if (check_border(ee->map, height, width))
 		return (-75);
-	if (!parse_map(ee, x, y))
+	if (parse_map(ee, x, y))
 		return (-47);
 	if (ee->cam.pos.y == -1)
 		return (-89);

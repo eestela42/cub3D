@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:36 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 15:40:37 by maskedduck       ###   ########.fr       */
+/*   Updated: 2022/03/28 19:01:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,14 @@ void	init_ee(t_mast *ee)
 	ee->rot_right = 0;
 	ee->rot_left = 0;
 	ee->img.img = NULL;
+	ee->map = NULL;
+	ee->win = NULL;
 	ee->sp.n.img = NULL;
 	ee->sp.s.img = NULL;
 	ee->sp.e.img = NULL;
 	ee->sp.w.img = NULL;
+	ee->hauteur = HAUTEUR;
+	ee->jump = 0;
 }
 
 int	parsing(t_mast *ee, char *file)
@@ -97,5 +101,6 @@ int	parsing(t_mast *ee, char *file)
 	free(buff);
 	if (!line)
 		return (-3);
+	line = ft_strjoin_free(line, "\n");
 	return (get_info(ee, line));
 }

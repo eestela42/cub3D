@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   affichage.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:10 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 15:40:12 by maskedduck       ###   ########.fr       */
+/*   Updated: 2022/03/28 18:46:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ t_data	texture_offset(t_mast *ee, t_pix_column column, float *offset)
 
 	if (column.finder == 'x')
 	{
-		if (column.ray_dir.x >= 0)
+		if (column.ray_dir.x > 0)
 			texture = ee->sp.n;
 		else
 			texture = ee->sp.s;
 		*offset = column.col.y - floor(column.col.y);
-		if (column.ray_dir.x >= 0)
+		if (column.ray_dir.x > 0)
 			*offset = 1 - *offset;
 	}
 	else
 	{
-		if (column.ray_dir.y >= 0)
+		if (column.ray_dir.y > 0)
 			texture = ee->sp.w;
 		else
 			texture = ee->sp.e;
 		*offset = column.col.x - floor(column.col.x);
-		if (column.ray_dir.y < 0)
+		if (column.ray_dir.y <= 0)
 			*offset = 1 - *offset;
 	}
 	return (texture);
@@ -58,18 +58,18 @@ int	fill_column(t_mast *ee, t_pix_column column)
 	float	zone;
 	float	coef_fov;
 
-	coef_fov = tan(FOV * (float) RESY / RESX / 2) * 3;
+	coef_fov = tan(FOV / 2) * ((float) RESY / RESX) * 2;
 	y = 0;
 	while (y < RESY)
 	{
 		zone = (y - (float) RESY / 2) / (RESY / 2) * coef_fov * column.dist;
-		if (zone > 1)
+		if (zone > 1 - ee->hauteur)
 			my_mlx_pixel_put(&ee->img, column.x, y, ee->floor);
-		else if (zone < -1)
+		else if (zone < -1 - ee->hauteur)
 			my_mlx_pixel_put(&ee->img, column.x, y, ee->ceil);
 		else
 			my_mlx_pixel_put(&ee->img, column.x, y,
-				color_pix(ee, zone, column));
+				color_pix(ee, zone + ee->hauteur, column));
 		y++;
 	}
 	return (0);
