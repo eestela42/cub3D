@@ -1,5 +1,16 @@
-#include "../cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/28 15:40:36 by maskedduck        #+#    #+#             */
+/*   Updated: 2022/03/28 15:40:37 by maskedduck       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../cub3D.h"
 
 void	init_mast(t_mast *ee)
 {
@@ -9,7 +20,7 @@ void	init_mast(t_mast *ee)
 	ee->sp.w.img = NULL;
 }
 
-void	init_fct_tab(int	(*fct_tab[256])(t_mast *ee, char *line, int i))
+void	init_fct_tab(int (*fct_tab[256])(t_mast *ee, char *line, int i))
 {
 	int	i;
 
@@ -42,19 +53,33 @@ int	get_info(t_mast *ee, char *line)
 			break ;
 		i = fct_tab[(int)line[i]](ee, line, i);
 	}
-	printf("sori i = %i\n", i);
 	free(line);
 	return (i);
 }
 
+void	init_ee(t_mast *ee)
+{
+	ee->mv_forw = 0;
+	ee->mv_backw = 0;
+	ee->mv_left = 0;
+	ee->mv_right = 0;
+	ee->rot_right = 0;
+	ee->rot_left = 0;
+	ee->img.img = NULL;
+	ee->sp.n.img = NULL;
+	ee->sp.s.img = NULL;
+	ee->sp.e.img = NULL;
+	ee->sp.w.img = NULL;
+}
 
-int parsing(t_mast *ee, char *file)
+int	parsing(t_mast *ee, char *file)
 {
 	char	*buff;
 	char	*line;
-	int  	fd;
-	int  	r;
+	int		fd;
+	int		r;
 
+	init_ee(ee);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (-1);

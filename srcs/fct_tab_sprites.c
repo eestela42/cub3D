@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fct_tab_sprites.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/28 15:40:22 by maskedduck        #+#    #+#             */
+/*   Updated: 2022/03/28 15:40:23 by maskedduck       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3D.h"
 
 int	xpm_to_image(void *mlx_ptr, char *line, int i, t_data *sprite)
@@ -67,83 +79,4 @@ int	fct_tab_west(t_mast *ee, char *line, int i)
 	while (line[i] == ' ')
 		i++;
 	return (xpm_to_image(ee->mlx, line, i, &ee->sp.w));
-}
-
-int	check_rgb(int rgb[3])
-{
-	int	i;
-
-	i = 0;
-	while (i < 3)
-		if (rgb[i] < 0 || rgb[i++] > 255)
-			return (1);
-	return (0);
-}
-
-int	fct_tab_floor(t_mast *ee, char *line, int i)
-{
-	int	x;
-	int	y;
-	int	start;
-	int	floor[3];
-
-	i++;
-	while (line[i] && line[i] == ' ')
-		i++;
-	start = i;
-	x = 0;
-	y = 0;
-	while (x < 3)
-	{
-		y = 0;
-		floor[x] = ft_atoi(&line[start]);
-		while (y++ < 3 && line[i] >= '0' && line[i] <= '9')
-			i++;
-		if (x < 2 && line[i++] != ',')
-			return (-93);
-		start = i;
-		x++;
-	}
-	if (check_rgb(floor))
-		return (-666);
-	ee->floor = create_trgb(0, floor[0], floor[1], floor[2]);
-	while (line[i] && line[i] == ' ')
-		i++;
-	if (line[i] != '\n')
-		return (-94);
-	return (i);
-}
-
-int	fct_tab_ceiling(t_mast *ee, char *line, int i)
-{
-	int	x;
-	int	y;
-	int	start;
-	int	ceil[3];
-
-	i++;
-	while (line[i] && line[i] == ' ')
-		i++;
-	start = i;
-	x = 0;
-	y = 0;
-	while (x < 3)
-	{
-		y = 0;
-		ceil[x] = ft_atoi(&line[start]);
-		while (y++ < 3 && line[i] >= '0' && line[i] <= '9')
-			i++;
-		if (x < 2 && line[i++] != ',')
-			return (-93);
-		start = i;
-		x++;
-	}
-	if (check_rgb(ceil))
-		return (-666);
-	ee->ceil = create_trgb(0, ceil[0], ceil[1], ceil[2]);
-	while (line[i] && line[i] == ' ')
-		i++;
-	if (line[i] != '\n')
-		return (-94);
-	return (i);
 }

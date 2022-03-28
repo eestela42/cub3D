@@ -1,15 +1,15 @@
 
-NO ./sprites/north_texture.xpm
+NO ./sprites/NORD.xpm
 
-SO ./sprites/south_texture.xpm
-
-
-WE ./sprites/west_texture.xpm
+SO ./sprites/SUD.xpm
 
 
+WE ./sprites/OUEST.xpm
 
 
-EA ./sprites/east_texture.xpm
+
+
+EA ./sprites/EST.xpm
 
 F      125,36,55
 C      025,36,255

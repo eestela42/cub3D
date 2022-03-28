@@ -13,7 +13,7 @@
 
 # define RESX 1600
 # define RESY 900
-# define FOV 100 * M_PI / 180
+# define FOV 90 * M_PI / 180
 
 # define foot_velocity 		0.3
 # define neck_velocity		10
@@ -63,9 +63,18 @@ typedef	struct s_rep_sprites
 	t_data	w;
 }				t_rep_sprites;
 
+typedef struct s_pix_column
+{
+	char	finder;
+	float	dist;
+	t_point	col;
+	t_point	ray_dir;
+	int		x;
+}				t_pix_column;
+
 typedef struct s_mast
 {
-	int				secu;
+	int				check;
 	int				r;
 	char			mem;
 	char			**map;
@@ -84,12 +93,18 @@ typedef struct s_mast
 	t_cam			cam;
 	t_rep_sprites	sp;
 	t_data			img;
+	t_data			mem_img;
 }				t_mast;
 
 /* PARSING */
 
 int		parsing(t_mast *ee, char *file);
 int		parsing_map(t_mast *ee, char *line, int i);
+int		check_space(char **map, int x, int y);
+int		check_border(char **map, int height, int width);
+int		char_in_map(t_mast *ee, int x, int y);
+int		error_in_map(t_mast *ee, int height, int width);
+char	**error_map(char **map, int i);
 
 
 /* PARSING UTILS */
@@ -124,6 +139,17 @@ t_point	normalize(t_point a);
 t_point	diff(t_point a, t_point b);
 float	dot(t_point a, t_point b);
 
+/*Collision*/
+char	find_colision(t_mast *ee, t_ray ray, t_point *col);
+t_point	colision_x(t_mast *ee, t_ray ray);
+t_point	colision_y(t_mast *ee, t_ray ray);
+
+/*Affi_utils*/
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		my_mlx_pixel_get(t_data *data, int x, int y);
+int		create_trgb(int t, int r, int g, int b);
+float	equation_x(t_ray ray, int y);
+float	equation_y(t_ray ray, int x);
 
 int	ft_end(t_mast *ee);
 

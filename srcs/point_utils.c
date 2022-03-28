@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point.c                                            :+:      :+:    :+:   */
+/*   point_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 15:40:39 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 15:40:40 by maskedduck       ###   ########.fr       */
+/*   Created: 2022/03/28 15:40:43 by maskedduck        #+#    #+#             */
+/*   Updated: 2022/03/28 15:40:44 by maskedduck       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-float	norm(t_point a)
+t_point	add(t_point a, t_point b)
 {
-	return (sqrt(a.x * a.x + a.y * a.y));
+	return ((t_point){a.x + b.x, a.y + b.y});
 }
 
-float	distance(t_point a, t_point b)
+t_point	mult(float m, t_point p)
 {
-	return (norm(diff(a, b)));
+	return ((t_point){p.x * m, p.y * m});
 }
 
-t_point	normalize(t_point a)
+char	**error_map(char **map, int i)
 {
-	if (!norm(a))
-		return (a);
-	return (mult(1 / norm(a), a));
-}
-
-float	dot(t_point a, t_point b)
-{
-	return (a.x * b.x + a.y * b.y);
-}
-
-t_point	diff(t_point a, t_point b)
-{
-	return ((t_point){a.x - b.x, a.y - b.y});
+	while (i)
+		free(map[i--]);
+	free(map);
+	return (NULL);
 }

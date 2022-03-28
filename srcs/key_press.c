@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_press.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/28 15:40:30 by maskedduck        #+#    #+#             */
+/*   Updated: 2022/03/28 15:42:20 by maskedduck       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3D.h"
 
 int	key_release(int key, t_mast *ee)
@@ -66,10 +78,11 @@ int	key_action(t_mast *ee)
 			add(ee->cam.pos, mult(-0.33, ortho)), ee))
 		ee->cam.pos = add(ee->cam.pos, mult(-foot_velocity, ortho));
 	if (ee->rot_left == 1)
-		ee->cam.angle += neck_velocity * M_PI / 180;
+		ee->cam.angle += (neck_velocity + 0.1) * M_PI / 180;
 	if (ee->rot_right == 1)
 		ee->cam.angle -= neck_velocity * M_PI / 180;
 	fill_image(&ee->img, &ee->cam, ee);
-	mlx_put_image_to_window(ee->mlx, ee->win, ee->img.img, 0, 0);
+	ee->mem_img = ee->img;
+	mlx_put_image_to_window(ee->mlx, ee->win, ee->mem_img.img, 0, 0);
 	return (1);
 }
