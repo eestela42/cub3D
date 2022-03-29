@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/21 13:18:56 by user42            #+#    #+#              #
-#    Updated: 2022/03/29 19:53:22 by user42           ###   ########.fr        #
+#    Updated: 2022/03/29 20:22:55 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,9 +41,11 @@ $(NAME):	$(OBJS)
 		make -C minilibx-linux
 		$(CC)  $(OBJS) $(CFLAGS) -o $(NAME) minilibx-linux/libmlx.a $(OPENGL)
 
-bonus: $(OBJS_BONUS)
-		make -C minilibx-linux
-		$(CC)  $(OBJS_BONUS) $(CFLAGS) -o $(NAME) minilibx-linux/libmlx.a $(OPENGL)
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS):	$(OBJS_BONUS)
+				make -C minilibx-linux
+				$(CC)  $(OBJS_BONUS) $(CFLAGS) -o $(NAME_BONUS) minilibx-linux/libmlx.a $(OPENGL)
 
 clean:
 		rm -f $(OBJS)

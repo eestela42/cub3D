@@ -1,15 +1,15 @@
 
-NO ./sprites/NORD.xpm
+NO ./sprites/N.xpm
 
-SO ./sprites/SUD.xpm
-
-
-WE ./sprites/OUEST.xpm
+SO ./sprites/S.xpm
 
 
+WE ./sprites/O.xpm
 
 
-EA ./sprites/EST.xpm
+
+
+EA ./sprites/E.xpm
 
 F      125,36,55
 C      025,36,255
