@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:35 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/29 20:07:30 by user42           ###   ########.fr       */
+/*   Updated: 2022/03/28 18:08:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,5 @@ int	error_in_map(t_mast *ee, int height, int width)
 		return (-47);
 	if (ee->cam.pos.y == -1)
 		return (-89);
-	while (x < ee->height)
-	{
-		y = -1;
-		while (++y < ee->width)
-			if (ee->map[x][y] == ' ')
-				ee->map[x][y] = '1';
-		x++;
-	}
 	return (-1024);
 }

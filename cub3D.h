@@ -17,6 +17,7 @@
 # define HAUTEUR 0
 # define foot_velocity 		0.2
 # define neck_velocity		5
+# define JUMP_HEIGHT		2.0
 
 # define ROTATE_LEFT	65361
 # define ROTATE_RIGHT	65363
