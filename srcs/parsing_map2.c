@@ -6,7 +6,7 @@
 /*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:35 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/04/12 11:42:01 by eestela          ###   ########.fr       */
+/*   Updated: 2022/04/12 11:43:43 by eestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	error_in_map(t_mast *ee, int height, int width)
 		return (-47);
 	if (ee->cam.pos.y == -1)
 		return (-89);
+	/*
 	while (x < ee->height)
 	{
 		y = -1;
@@ -119,5 +120,6 @@ int	error_in_map(t_mast *ee, int height, int width)
 				ee->map[x][y] = '1';
 		x++;
 	}
+	*/
 	return (-1024);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+        */
+/*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:20 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 15:40:21 by maskedduck       ###   ########.fr       */
+/*   Updated: 2022/04/12 12:13:51 by eestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,18 @@ char	find_colision(t_mast *ee, t_ray ray, t_point *col)
 
 	col_x = colision_x(ee, ray);
 	col_y = colision_y(ee, ray);
-	if ((col_x.x == -1) || (col_y.y != -1
-			&& distance(ray.pos, col_x) > distance(ray.pos, col_y)))
+	if ((col_x.x == -1 && col_y.y != -1) ||
+			(col_y.y != -1 && distance(ray.pos, col_x) > distance(ray.pos, col_y)))
 	{
 		*col = col_y;
 		return ('y');
 	}
+	if ((col_y.y == -1 && col_x.x != -1) || 
+			(col_x.x != -1 && distance(ray.pos, col_y) > distance(ray.pos, col_x)))
+	{
+		*col = col_x;
+		return ('x');
+	}
 	*col = col_x;
-	return ('x');
+	return (0);
 }

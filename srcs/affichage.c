@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   affichage.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:10 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 18:46:15 by user42           ###   ########.fr       */
+/*   Updated: 2022/04/12 12:21:36 by eestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_data	texture_offset(t_mast *ee, t_pix_column column, float *offset)
 		if (column.ray_dir.x > 0)
 			*offset = 1 - *offset;
 	}
-	else
+	if (column.finder == 'y')
 	{
 		if (column.ray_dir.y > 0)
 			texture = ee->sp.w;
@@ -75,11 +75,13 @@ int	fill_column(t_mast *ee, t_pix_column column)
 	return (0);
 }
 
-float	projection(t_cam *cam, t_point col)
+float	projection(t_cam *cam, t_point col, char finder)
 {
 	t_point	ret;
 	t_point	dir;
 
+	if (!finder)
+		return (0);
 	ret = diff(col, cam->pos);
 	dir = (t_point){cos(cam->angle), sin(cam->angle)};
 	return (fabs(dot(ret, dir)));
@@ -104,7 +106,7 @@ int	fill_image(t_data *img, t_cam *cam, t_mast *ee)
 		ray.dir = normalize(add(ray.dir, mult(coef_fov
 						* (column.x - RESX / 2.0f) / (RESX / 2.0f), ortho)));
 		column.finder = find_colision(ee, ray, &column.col);
-		column.dist = projection(cam, column.col);
+		column.dist = projection(cam, column.col, column.finder);
 		column.ray_dir = ray.dir;
 		fill_column(ee, column);
 		column.x++;
