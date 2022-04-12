@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:34 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 19:00:35 by user42           ###   ########.fr       */
+/*   Updated: 2022/04/12 11:31:48 by eestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,8 @@ int	map_height(char *line, int i)
 				return (-63);
 			in_map = 1;
 		}
-		else if (line[i] == '\n' && in_map == 1)
-		{
-			height++;
+		else if (line[i] == '\n' && in_map == 1 && ++height)
 			in_map = 0;
-		}
 		else if (line[i] == '\n')
 			in_map = -1;
 		else if (line[i] != ' ')

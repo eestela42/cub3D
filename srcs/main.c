@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:32 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 17:41:52 by user42           ###   ########.fr       */
+/*   Updated: 2022/04/12 11:09:16 by eestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int ac, char **av)
 {
 	t_mast	ee;
 
-	if (ac != 2 && !ft_strend_is(av[1], ".cub"))
+	if (ac != 2 || !ft_strend_is(av[1], ".cub"))
 		ft_end(NULL);
 	ee.mlx = mlx_init();
 	ee.map = NULL;

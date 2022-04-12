@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:32 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 17:41:52 by user42           ###   ########.fr       */
+/*   Updated: 2022/04/12 11:11:39 by eestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	ft_strend_is(char *str, char *end)
 
 	i = ft_strlen(str) - ft_strlen(end);
 	j = 0;
+	if (i < 0)
+		return (0);
 	while (str[i + j])
 	{
 		if (str[i + j] != end[j])
@@ -73,7 +75,7 @@ int	main(int ac, char **av)
 {
 	t_mast	ee;
 
-	if (ac != 2 && !ft_strend_is(av[1], ".cub"))
+	if (ac != 2 || !ft_strend_is(av[1], ".cub"))
 		ft_end(NULL);
 	ee.mlx = mlx_init();
 	ee.map = NULL;

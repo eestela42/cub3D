@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
+#    By: eestela <eestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/21 13:18:56 by user42            #+#    #+#              #
-#    Updated: 2022/03/29 20:22:55 by user42           ###   ########.fr        #
+#    Updated: 2022/04/12 11:39:20 by eestela          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS =	main.c				\
 		collision.c			\
 		affichage_utils.c	\
 		key_press.c			\
+		key_action.c		\
 		point_utils.c		\
 		affichage.c			
 
