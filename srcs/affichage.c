@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   affichage.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:10 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/04/12 12:21:36 by eestela          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:03:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ int	fill_column(t_mast *ee, t_pix_column column)
 	y = 0;
 	while (y < RESY)
 	{
+		if (!column.finder)
+		{
+			if (y < RESY / 2)
+				my_mlx_pixel_put(&ee->img, column.x, y, ee->ceil);
+			else
+				my_mlx_pixel_put(&ee->img, column.x, y, ee->floor);		
+		}
+		else
+		{
 		zone = (y - (float) RESY / 2) / (RESY / 2) * coef_fov * column.dist;
 		if (zone > 1 - ee->hauteur)
 			my_mlx_pixel_put(&ee->img, column.x, y, ee->floor);
@@ -70,6 +79,7 @@ int	fill_column(t_mast *ee, t_pix_column column)
 		else
 			my_mlx_pixel_put(&ee->img, column.x, y,
 				color_pix(ee, zone + ee->hauteur, column));
+		}
 		y++;
 	}
 	return (0);

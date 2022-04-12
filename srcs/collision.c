@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:20 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/04/12 12:13:51 by eestela          ###   ########.fr       */
+/*   Updated: 2022/04/12 14:59:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,12 @@ char	find_colision(t_mast *ee, t_ray ray, t_point *col)
 		return ('y');
 	}
 	if ((col_y.y == -1 && col_x.x != -1) || 
-			(col_x.x != -1 && distance(ray.pos, col_y) > distance(ray.pos, col_x)))
+			(col_x.x != -1 && distance(ray.pos, col_y) >= distance(ray.pos, col_x)))
 	{
 		*col = col_x;
 		return ('x');
 	}
+	printf("pas trouve\n");
 	*col = col_x;
 	return (0);
 }
