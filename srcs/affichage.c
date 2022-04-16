@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   affichage.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:10 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/04/12 15:03:41 by user42           ###   ########.fr       */
+/*   Updated: 2022/04/16 13:38:13 by eestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ int	color_pix(t_mast *ee, float zone, t_pix_column column)
 	return (my_mlx_pixel_get(&texture, j, i));
 }
 
+void	no_finder(t_mast *ee, int y,t_pix_column column)
+{
+	if (y < RESY / 2)
+				my_mlx_pixel_put(&ee->img, column.x, y, ee->ceil);
+	else
+		my_mlx_pixel_put(&ee->img, column.x, y, ee->floor);	
+}
+
 int	fill_column(t_mast *ee, t_pix_column column)
 {
 	int		y;
@@ -63,12 +71,7 @@ int	fill_column(t_mast *ee, t_pix_column column)
 	while (y < RESY)
 	{
 		if (!column.finder)
-		{
-			if (y < RESY / 2)
-				my_mlx_pixel_put(&ee->img, column.x, y, ee->ceil);
-			else
-				my_mlx_pixel_put(&ee->img, column.x, y, ee->floor);		
-		}
+			no_finder(ee, y, column);
 		else
 		{
 		zone = (y - (float) RESY / 2) / (RESY / 2) * coef_fov * column.dist;

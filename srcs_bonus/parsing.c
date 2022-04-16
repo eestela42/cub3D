@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:36 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 19:01:04 by user42           ###   ########.fr       */
+/*   Updated: 2022/04/16 13:33:31 by eestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int	parsing(t_mast *ee, char *file)
 		line = ft_strjoin_free(line, buff);
 		r = read(fd, buff, 1024);
 	}
+	close(fd);
 	free(buff);
 	if (!line)
 		return (-3);
