@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:32 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/04/12 11:09:16 by eestela          ###   ########.fr       */
+/*   Updated: 2022/04/13 17:47:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,50 @@ void	destroy_sprites(t_mast *ee)
 		mlx_destroy_image(ee->mlx, ee->sp.w.img);
 }
 
+char	*ft_error_message2(int check)
+{
+	if (check == 666)
+		return("Wrong rgb values\n");
+	if (check == 2)
+		return("Invalid char after informations in 'map'.cub\n");
+	if (check == 142)
+		return("Malloc failed in xpm_to_image\n");
+	if (check == 13)
+		return("Function xpm_to_image failed\n");
+	if (check == 94)
+		return("Invalid char after rgb value in 'map'.cub\n");
+	if (check == 93)
+		return("Invalid rgb form\n");
+	if (check == 205)
+		return("Missing sprite(s) in the file 'map'.cub\n");
+	if (check == 63)
+		return("Invalid map, cut by at least one empty line\n");
+	return("\n");
+}
+
+char	*ft_error_message1(int check)
+{
+	if (check == 75)
+		return("Map not closed\n");
+	if (check == 36)
+		return("Unvalid char in map\n");
+	if (check == 89)
+		return("No starting position\n");
+	if (check == 47)
+		return("Map not closed because of a space\n");
+	if (check == 26)
+		return("Malloc failed to allocate for char *buff in parsing\n");
+	if (check == 1)
+		return("Failed to open the file 'map'.cub\n");
+	if (check == 3)
+		return("Malloc failed to allocate for char *line in parsing\n");
+	if (check == 190)
+		return("Unvalid char in the file 'map'.cub\n");
+	if (check == 150)
+		return("Unvalid sprite id\n");
+	return(ft_error_message2(check));
+}
+
 int	ft_end(t_mast *ee)
 {
 	int	i;
@@ -35,7 +79,7 @@ int	ft_end(t_mast *ee)
 		exit(1);
 	}
 	if (ee->check != -1024)
-		printf("ERROR %i\n", -ee->check);
+		printf("ERROR %s", ft_error_message1(-ee->check));
 	if (ee->map)
 		while (ee->map[i])
 			free(ee->map[i++]);

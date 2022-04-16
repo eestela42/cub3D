@@ -1,5 +1,7 @@
 
-NO ./sprites/NORD.xpm
+NO ./sprites/NORD.xpm 
+
+
 
 SO ./sprites/SUD.xpm
 
@@ -12,7 +14,7 @@ WE ./sprites/OUEST.xpm
 EA ./sprites/EST.xpm
 
 F      125,36,55
-C      025,36,255
+C      025,36,205
 
 
 
@@ -25,14 +27,15 @@ C      025,36,255
 
 
 
-                 111
-                 1N1
-                 111
-
-
-   
-
-
-
-
-
+                 11111111
+                 1N0000111
+                 111111  1
+                 111111111
+1
+1
+1  
+1
+1
+1
+1
+1

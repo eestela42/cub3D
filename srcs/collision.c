@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:20 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/04/12 14:59:29 by user42           ###   ########.fr       */
+/*   Updated: 2022/04/13 17:44:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ char	find_colision(t_mast *ee, t_ray ray, t_point *col)
 		*col = col_x;
 		return ('x');
 	}
-	printf("pas trouve\n");
 	*col = col_x;
 	return (0);
 }

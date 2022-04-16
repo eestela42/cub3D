@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:35 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 18:08:01 by user42           ###   ########.fr       */
+/*   Updated: 2022/04/13 15:46:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,19 @@ int	check_border(char **map, int height, int width)
 	i = -1;
 	while (++i < height)
 		if (map[i][0] != ' ' && map[i][0] != '1')
-			return (1);
+			return (75);
 	i = -1;
 	while (++i < width)
 		if (map[0][i] != ' ' && map[0][i] != '1')
-			return (1);
+			return (75);
 	i = -1;
 	while (++i < height)
 		if (map[i][width - 1] != ' ' && map[i][width - 1] != '1')
-			return (1);
+			return (75);
 	i = -1;
 	while (++i < width)
 		if (map[height - 1][i] != ' ' && map[height - 1][i] != '1')
-			return (1);
+			return (75);
 	return (0);
 }
 
@@ -100,15 +100,16 @@ int	error_in_map(t_mast *ee, int height, int width)
 {
 	int	x;
 	int	y;
+	int check;
 
 	x = 0;
 	y = 0;
 	ee->cam.pos.x = -1;
 	ee->cam.pos.y = -1;
-	if (check_border(ee->map, height, width))
-		return (-75);
-	if (parse_map(ee, x, y))
-		return (-47);
+	if ((check = check_border(ee->map, height, width)))
+		return (check);
+	if ((check = parse_map(ee, x, y)))
+		return (check);
 	if (ee->cam.pos.y == -1)
 		return (-89);
 	return (-1024);

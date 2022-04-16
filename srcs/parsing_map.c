@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eestela <eestela@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:34 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/04/12 11:31:48 by eestela          ###   ########.fr       */
+/*   Updated: 2022/04/13 15:38:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	line_in_map(char *line, int i)
 {
 	while (line[i] && line[i] != '\n')
 	{
-		if (line[i] == '1')
+		if (line[i] == '1' || line[i] == '0')
 			return (1);
 		i++;
 	}
@@ -88,7 +88,7 @@ char	**make_map(char *line, int start, int height, int width)
 	{
 		map[i] = malloc(sizeof(char) * (width + 1));
 		if (!map[i])
-			return (error_map(map, i));
+			return (error_map(map, i - 1));
 		y = 0;
 		while (line[start] && line[start] != '\n')
 			map[i][y++] = line[start++];

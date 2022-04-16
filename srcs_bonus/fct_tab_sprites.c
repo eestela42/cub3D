@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fct_tab_sprites.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maskedduck <maskedduck@student.42.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 15:40:22 by maskedduck        #+#    #+#             */
-/*   Updated: 2022/03/28 15:40:23 by maskedduck       ###   ########.fr       */
+/*   Updated: 2022/04/13 15:43:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	xpm_to_image(void *mlx_ptr, char *line, int i, t_data *sprite)
 			return (-2);
 	path = ft_substr(line, start, end - start);
 	if (!path)
-		return (-1);
+		return (-142);
 	sprite->img = mlx_xpm_file_to_image(mlx_ptr, path,
 			&sprite->width, &sprite->height);
 	if (sprite->img)
@@ -54,7 +54,7 @@ int	fct_tab_north(t_mast *ee, char *line, int i)
 int	fct_tab_south(t_mast *ee, char *line, int i)
 {
 	if (line[++i] != 'O' || ee->sp.s.img)
-		return (-1);
+		return (-150);
 	i += 1;
 	while (line[i] == ' ')
 		i++;
@@ -64,7 +64,7 @@ int	fct_tab_south(t_mast *ee, char *line, int i)
 int	fct_tab_east(t_mast *ee, char *line, int i)
 {
 	if (line[++i] != 'A' || ee->sp.e.img)
-		return (-1);
+		return (-150);
 	i += 1;
 	while (line[i] == ' ')
 		i++;
@@ -74,7 +74,7 @@ int	fct_tab_east(t_mast *ee, char *line, int i)
 int	fct_tab_west(t_mast *ee, char *line, int i)
 {
 	if (line[++i] != 'E' || ee->sp.w.img)
-		return (-1);
+		return (-150);
 	i += 1;
 	while (line[i] == ' ')
 		i++;
